@@ -34,6 +34,7 @@ import { Separator } from "@/components/ui/separator";
 import { Rating } from "@/components/ui/rating";
 import { createCustomerFeedback } from "../actions/testimonials";
 import { useRouter } from "next/navigation";
+import { useRef } from "react";
 
 export const FeedbackFormSchema = z.object({
   name: z.string().optional(),
@@ -65,7 +66,11 @@ export function FeedbackModal() {
         toast.success(
           `Thank you for your feedback${isAnonymous ? "" : `, ${values.name}`}!`
         );
+
+        closeButtonRef.current?.click();
+
         router.refresh();
+
         form.reset();
       });
     } catch (error) {
@@ -76,6 +81,8 @@ export function FeedbackModal() {
 
   const isAnonymous = form.watch("anonymous");
   const rating = form.watch("rating");
+
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   return (
     <Dialog>
@@ -184,7 +191,7 @@ export function FeedbackModal() {
               />
             </div>
             <DialogFooter>
-              <DialogClose asChild>
+              <DialogClose ref={closeButtonRef} asChild>
                 <Button variant="outline">Cancel</Button>
               </DialogClose>
               <Button type="submit">Submit</Button>
