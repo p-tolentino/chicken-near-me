@@ -75,44 +75,6 @@ const features = [
   },
 ];
 
-// const testimonials = [
-//   {
-//     name: "Juan Dela Cruz",
-//     comment: "Ang sarap ng chicken, parang nanalo ako sa lotto!",
-//     avatar: "/placeholder.svg?height=48&width=48",
-//     rating: 5,
-//     anonymous: false,
-//   },
-//   {
-//     name: "Maria Santos",
-//     comment: "Mas malaki pa sa sweldo ko ang chicken nila!",
-//     avatar: "/placeholder.svg?height=48&width=48",
-//     rating: 2.5,
-//     anonymous: false,
-//   },
-//   {
-//     name: "Pedro Penduko",
-//     comment: "Pwedeng pang-away sa kalye, pero mas masarap kainin!",
-//     avatar: "/placeholder.svg?height=48&width=48",
-//     rating: 4,
-//     anonymous: false,
-//   },
-//   {
-//     name: "Nena Babushka",
-//     comment: "Parang magic, nawala ang pagod ko sa trabaho!",
-//     avatar: "/placeholder.svg?height=48&width=48",
-//     rating: 4.5,
-//     anonymous: false,
-//   },
-//   {
-//     name: "",
-//     comment: "Anonymous comment!",
-//     avatar: "/placeholder.svg?height=48&width=48",
-//     rating: 4.5,
-//     anonymous: true,
-//   },
-// ];
-
 export default function Landing({
   testimonials,
 }: {
@@ -138,7 +100,7 @@ export default function Landing({
 
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="container mx-auto px-4 py-6 flex justify-between items-center">
+      <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex justify-between items-center">
         <h1 className="text-2xl font-bold flex items-center ">
           <Image
             src="/cover.png"
@@ -151,24 +113,24 @@ export default function Landing({
         </h1>
       </header>
 
-      <main className="container mx-auto px-4 py-12 flex-grow">
-        <section className="mb-24">
-          <div className="flex flex-col justify-between md:flex-row items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex-grow">
+        <section className="mb-16 sm:mb-20 lg:mb-24">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-12">
+            <div className="w-full lg:w-1/2 text-center lg:text-left">
               <MotionWrapper>
-                <h2 className="text-4xl md:text-6xl font-bold mb-4">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
                   No bones. All flavor.
                 </h2>
               </MotionWrapper>
               <MotionWrapper delay={0.2}>
-                <p className="text-xl  mb-6">
+                <p className="text-lg sm:text-xl mb-6 text-muted-foreground">
                   Savor every bite with endless boneless goodness
                 </p>
               </MotionWrapper>
               <MotionWrapper delay={0.4}>
                 <Button
                   size="lg"
-                  className="bg-primary hover:cursor-pointer "
+                  className="bg-primary hover:cursor-pointer text-base"
                   onClick={() =>
                     router.push(
                       `https://food.grab.com/ph/en/restaurant/chicken-near-me-alabang-delivery/2-C7AYAEAALYTZJ6?`
@@ -176,12 +138,12 @@ export default function Landing({
                   }
                 >
                   Order Now
-                  <ChevronRight className="ml-2 h-4 w-4" />
+                  <ChevronRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
               </MotionWrapper>
             </div>
 
-            <div className="w-1/3">
+            <div className="w-full sm:w-2/3 md:w-1/2 lg:w-1/3 max-w-md lg:max-w-none">
               <motion.div
                 className="relative"
                 style={{ perspective: 1000 }}
@@ -199,9 +161,9 @@ export default function Landing({
                   height={888}
                   src="/logo.png"
                   alt="Chicken Near Me Logo"
-                  className="rounded-3xl object-covermx-auto "
+                  className="rounded-3xl object-cover mx-auto w-full"
                 />
-                <Badge className="absolute top-16 -right-14 text-md shadow-lg ring-2 bg-gradient-to-r from-green-500 to-pink-500">
+                <Badge className="absolute top-4 sm:top-8 lg:top-16 -right-4 sm:-right-8 lg:-right-14 text-xs sm:text-sm lg:text-md shadow-lg ring-2 bg-gradient-to-r from-green-500 to-pink-500 px-2 sm:px-3 py-1 sm:py-2">
                   Also on GrabFood & FoodPanda!
                 </Badge>
               </motion.div>
@@ -209,20 +171,22 @@ export default function Landing({
           </div>
         </section>
 
-        <section className="mb-24">
-          <h3 className="text-3xl font-bold mb-8 text-center">
+        <section className="mb-16 sm:mb-20 lg:mb-24">
+          <h3 className="text-2xl sm:text-3xl font-bold mb-8 text-center">
             What Makes Our Chicken Clucking Amazing
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {features.map((feature, index) => (
               <MotionWrapper key={index} delay={index * 0.1}>
-                <Card className="w-full h-full shadow-md">
-                  <CardContent className="p-6 flex flex-col items-center text-center">
-                    <feature.icon className="h-12 w-12  mb-4" />
-                    <h4 className="text-xl font-semibold mb-2">
+                <Card className="w-full h-full shadow-md hover:shadow-lg transition-shadow">
+                  <CardContent className="p-4 sm:p-6 flex flex-col items-center text-center">
+                    <feature.icon className="h-10 w-10 sm:h-12 sm:w-12 mb-4 text-primary" />
+                    <h4 className="text-lg sm:text-xl font-semibold mb-2">
                       {feature.title}
                     </h4>
-                    <p>{feature.description}</p>
+                    <p className="text-sm sm:text-base text-muted-foreground">
+                      {feature.description}
+                    </p>
                   </CardContent>
                 </Card>
               </MotionWrapper>
@@ -231,14 +195,14 @@ export default function Landing({
         </section>
 
         {testimonials.length > 0 && (
-          <section className="mb-24">
+          <section className="mb-16 sm:mb-20 lg:mb-24">
             <Card className="bg-primary text-white">
-              <CardContent className="p-8">
-                <h3 className="text-3xl font-bold mb-4">
+              <CardContent className="p-4 sm:p-6 lg:p-8">
+                <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-center lg:text-left">
                   What Our Customers Say
                 </h3>
 
-                <div className="p-10">
+                <div className="p-4 sm:p-6 lg:p-10">
                   <Carousel
                     className="w-full mx-auto"
                     opts={{
@@ -257,20 +221,20 @@ export default function Landing({
                         >
                           <MotionWrapper key={index} delay={index * 0.1}>
                             <Card>
-                              <CardContent className="p-6">
+                              <CardContent className="p-4 sm:p-6">
                                 <div className="flex items-center mb-4">
-                                  <UserCircle className="w-12 h-12 mr-4 object-cover text-neutral-500" />
-                                  <div>
+                                  <UserCircle className="w-10 h-10 sm:w-12 sm:h-12 mr-3 sm:mr-4 object-cover text-neutral-500 flex-shrink-0" />
+                                  <div className="min-w-0 flex-1">
                                     <h4
-                                      className={
+                                      className={`text-sm sm:text-base truncate ${
                                         testimonial.anonymous
                                           ? `italic text-neutral-500`
                                           : `font-semibold`
-                                      }
+                                      }`}
                                     >
                                       {testimonial.name || `Anonymous User`}
                                     </h4>
-                                    <div className="flex text-[#f2ac07] items-center gap-2">
+                                    <div className="flex text-[#f2ac07] items-center gap-1 sm:gap-2">
                                       <span className="flex">
                                         {[...Array(5)].map((_, i) => {
                                           const starValue = i + 1; // star position (1 to 5)
@@ -280,7 +244,7 @@ export default function Landing({
                                             return (
                                               <StarFill
                                                 key={i}
-                                                className="h-4 w-4"
+                                                className="h-3 w-3 sm:h-4 sm:w-4"
                                               />
                                             );
                                           } else if (
@@ -291,7 +255,7 @@ export default function Landing({
                                             return (
                                               <HalfStar
                                                 key={i}
-                                                className="h-4 w-4"
+                                                className="h-3 w-3 sm:h-4 sm:w-4"
                                               />
                                             );
                                           } else {
@@ -299,14 +263,14 @@ export default function Landing({
                                             return (
                                               <Star
                                                 key={i}
-                                                className="h-4 w-4"
+                                                className="h-3 w-3 sm:h-4 sm:w-4"
                                               />
                                             );
                                           }
                                         })}
                                       </span>
 
-                                      <span className="italic text-neutral-400 text-sm">
+                                      <span className="italic text-neutral-400 text-xs sm:text-sm">
                                         {`${testimonial.rating} star${
                                           testimonial.rating !== 1 && `s`
                                         }`}
@@ -314,7 +278,9 @@ export default function Landing({
                                     </div>
                                   </div>
                                 </div>
-                                <p className="italic">{testimonial.comment}</p>
+                                <p className="italic text-sm sm:text-base">
+                                  {testimonial.comment}
+                                </p>
                               </CardContent>
                             </Card>
                           </MotionWrapper>{" "}
@@ -323,11 +289,11 @@ export default function Landing({
                     </CarouselContent>
                     <CarouselPrevious
                       variant={"ghost"}
-                      className="hover:cursor-pointer"
+                      className="hover:cursor-pointer hidden sm:flex"
                     />
                     <CarouselNext
                       variant={"ghost"}
-                      className="hover:cursor-pointer"
+                      className="hover:cursor-pointer hidden sm:flex"
                     />
                   </Carousel>
                 </div>
@@ -336,11 +302,11 @@ export default function Landing({
           </section>
         )}
 
-        <section className="text-center">
-          <h3 className="text-3xl font-bold mb-4">
+        <section className="text-center px-4">
+          <h3 className="text-2xl sm:text-3xl font-bold mb-4">
             Enjoyed your meal? We&apos;d love your feedback!
           </h3>
-          <p className="flex items-center text-center gap-2 text-xl mb-8 justify-center">
+          <p className="flex items-center text-center gap-2 text-xl mb-8 justify-center flex-wrap">
             <span>Your thoughts help us make every meal even better</span>
             <Smile />
           </p>
@@ -349,35 +315,41 @@ export default function Landing({
       </main>
 
       <footer className="bg-primary text-white">
-        <div className="flex h-16 items-center justify-around w-full ">
-          <div>
+        <div className="flex flex-col sm:flex-row h-auto sm:h-16 items-center justify-center sm:justify-around w-full gap-4 sm:gap-0 py-4 sm:py-0">
+          <div className="w-full sm:w-auto">
             <Link
               href={`https://www.facebook.com/chickennearme`}
               target="_blank"
-              className="flex bg-white-500 container mx-auto px-4 text-center items-center"
+              className="flex bg-white-500 container mx-auto px-4 text-center items-center justify-center sm:justify-start hover:opacity-80 transition-opacity"
             >
-              <Facebook className="w-8 h-8 " />
-              <p className="ml-3">Chicken Near Me</p>
+              <Facebook className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" />
+              <p className="ml-2 sm:ml-3 text-sm sm:text-base">
+                Chicken Near Me
+              </p>
             </Link>
           </div>
-          <div>
+          <div className="w-full sm:w-auto">
             <Link
               href={`https://www.instagram.com/chickennearmeph`}
               target="_blank"
-              className="flex bg-white-500 container mx-auto px-4 text-center items-center"
+              className="flex bg-white-500 container mx-auto px-4 text-center items-center justify-center sm:justify-start hover:opacity-80 transition-opacity"
             >
-              <Instagram className="w-8 h-8 " />
-              <p className="ml-3">@chickennearmeph</p>
+              <Instagram className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" />
+              <p className="ml-2 sm:ml-3 text-sm sm:text-base">
+                @chickennearmeph
+              </p>
             </Link>
           </div>
-          <div>
+          <div className="w-full sm:w-auto">
             <Link
               href={`https://maps.app.goo.gl/KTHzbW9gNNg2xzNF8`}
               target="_blank"
-              className="flex bg-white-500 container mx-auto px-4 text-center items-center"
+              className="flex bg-white-500 container mx-auto px-4 text-center items-center justify-center sm:justify-start hover:opacity-80 transition-opacity"
             >
-              <LocationPin className="w-8 h-8 " />
-              <p className="ml-3">Chicken Near Me, Alabang</p>
+              <LocationPin className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" />
+              <p className="ml-2 sm:ml-3 text-sm sm:text-base">
+                Chicken Near Me, Alabang
+              </p>
             </Link>
           </div>
         </div>

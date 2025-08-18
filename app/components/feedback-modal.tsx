@@ -87,7 +87,10 @@ export function FeedbackModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size="lg" className="bg-primary hover:cursor-pointer">
+        <Button
+          size="lg"
+          className="bg-primary hover:cursor-pointer sm:text-base px-6 sm:px-8 py-3 sm:py-4"
+        >
           Give Feedback <ChevronRight className="ml-2 h-4 w-4" />
         </Button>
       </DialogTrigger>
