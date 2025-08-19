@@ -215,84 +215,89 @@ export default function Landing({
                       align: "start",
                       loop: true,
                     }}
-                    plugins={[autoplay.current]}
+                    // plugins={[autoplay.current]}
                   >
                     <CarouselContent className="-ml-2 md:-ml-4">
-                      {testimonials.map((testimonial, index) => (
-                        <CarouselItem
-                          key={index}
-                          className={`w-full ${
-                            testimonials.length > 1 && `lg:basis-1/2`
-                          } pl-2 md:pl-4`}
-                        >
-                          <MotionWrapper key={index} delay={index * 0.1}>
-                            <Card>
-                              <CardContent className="p-4 sm:p-6">
-                                <div className="flex items-center mb-4">
-                                  <UserCircle className="w-10 h-10 sm:w-12 sm:h-12 mr-3 sm:mr-4 object-cover text-neutral-500 flex-shrink-0" />
-                                  <div className="min-w-0 flex-1">
-                                    <h4
-                                      className={`text-sm sm:text-base truncate ${
-                                        testimonial.anonymous
-                                          ? `italic text-neutral-500`
-                                          : `font-semibold`
-                                      }`}
-                                    >
-                                      {testimonial.name || `Anonymous User`}
-                                    </h4>
-                                    <div className="flex text-[#f2ac07] items-center gap-1 sm:gap-2">
-                                      <span className="flex">
-                                        {[...Array(5)].map((_, i) => {
-                                          const starValue = i + 1; // star position (1 to 5)
+                      {testimonials.map(
+                        (testimonial, index) =>
+                          !testimonial.is_archived && (
+                            <CarouselItem
+                              key={index}
+                              className={`w-full ${
+                                testimonials.length > 1 && `lg:basis-1/2`
+                              } pl-2 md:pl-4`}
+                            >
+                              <MotionWrapper key={index} delay={index * 0.1}>
+                                <Card>
+                                  <CardContent className="p-4 sm:p-6">
+                                    <div className="flex items-center mb-4">
+                                      <UserCircle className="w-10 h-10 sm:w-12 sm:h-12 mr-3 sm:mr-4 object-cover text-neutral-500 flex-shrink-0" />
+                                      <div className="min-w-0 flex-1">
+                                        <h4
+                                          className={`text-sm sm:text-base truncate ${
+                                            testimonial.anonymous
+                                              ? `italic text-neutral-500`
+                                              : `font-semibold`
+                                          }`}
+                                        >
+                                          {testimonial.name || `Anonymous User`}
+                                        </h4>
+                                        <div className="flex text-[#f2ac07] items-center gap-1 sm:gap-2">
+                                          <span className="flex">
+                                            {[...Array(5)].map((_, i) => {
+                                              const starValue = i + 1; // star position (1 to 5)
 
-                                          if (testimonial.rating >= starValue) {
-                                            // full star
-                                            return (
-                                              <StarFill
-                                                key={i}
-                                                className="h-3 w-3 sm:h-4 sm:w-4"
-                                              />
-                                            );
-                                          } else if (
-                                            testimonial.rating >=
-                                            starValue - 0.5
-                                          ) {
-                                            // half star
-                                            return (
-                                              <HalfStar
-                                                key={i}
-                                                className="h-3 w-3 sm:h-4 sm:w-4"
-                                              />
-                                            );
-                                          } else {
-                                            // empty star
-                                            return (
-                                              <Star
-                                                key={i}
-                                                className="h-3 w-3 sm:h-4 sm:w-4"
-                                              />
-                                            );
-                                          }
-                                        })}
-                                      </span>
+                                              if (
+                                                testimonial.rating >= starValue
+                                              ) {
+                                                // full star
+                                                return (
+                                                  <StarFill
+                                                    key={i}
+                                                    className="h-3 w-3 sm:h-4 sm:w-4"
+                                                  />
+                                                );
+                                              } else if (
+                                                testimonial.rating >=
+                                                starValue - 0.5
+                                              ) {
+                                                // half star
+                                                return (
+                                                  <HalfStar
+                                                    key={i}
+                                                    className="h-3 w-3 sm:h-4 sm:w-4"
+                                                  />
+                                                );
+                                              } else {
+                                                // empty star
+                                                return (
+                                                  <Star
+                                                    key={i}
+                                                    className="h-3 w-3 sm:h-4 sm:w-4"
+                                                  />
+                                                );
+                                              }
+                                            })}
+                                          </span>
 
-                                      <span className="italic text-neutral-400 text-xs sm:text-sm">
-                                        {`${testimonial.rating} star${
-                                          testimonial.rating !== 1 && `s`
-                                        }`}
-                                      </span>
+                                          <span className="italic text-neutral-400 text-xs sm:text-sm">
+                                            {`${testimonial.rating} star${
+                                              testimonial.rating !== 1 && `s`
+                                            }`}
+                                          </span>
+                                        </div>
+                                      </div>
                                     </div>
-                                  </div>
-                                </div>
-                                {/* {// TODO: SCROLL AREA FOR LONG REVIEWS} */}
-                                <ScrollArea className="italic text-sm sm:text-base min-h-52 sm:min-h-48 md:min-h-32 xl:min-h-24 p-1">
-                                  <p>{testimonial.comment}</p>
-                                </ScrollArea>
-                              </CardContent>
-                            </Card>
-                          </MotionWrapper>{" "}
-                        </CarouselItem>
-                      ))}
+                                    {/* {// TODO: SCROLL AREA FOR LONG REVIEWS} */}
+                                    <ScrollArea className="italic text-sm sm:text-base min-h-52 sm:min-h-48 md:min-h-32 xl:min-h-24 p-1">
+                                      <p>{testimonial.comment}</p>
+                                    </ScrollArea>
+                                  </CardContent>
+                                </Card>
+                              </MotionWrapper>{" "}
+                            </CarouselItem>
+                          )
+                      )}
                     </CarouselContent>
                     <CarouselPrevious
                       variant={"ghost"}
