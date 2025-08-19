@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import {
   FaFacebookF as Facebook,
@@ -163,9 +164,14 @@ export default function Landing({
                   alt="Chicken Near Me Logo"
                   className="rounded-3xl object-cover mx-auto w-full"
                 />
-                <Badge className="absolute top-4 sm:top-8 lg:top-16 -right-4 sm:-right-8 lg:-right-14 text-xs sm:text-sm lg:text-md shadow-lg ring-2 bg-gradient-to-r from-green-500 to-pink-500 px-2 sm:px-3 py-1 sm:py-2">
-                  Also on GrabFood & FoodPanda!
-                </Badge>
+                <div className="absolute top-4 sm:top-8 lg:top-16 -right-4 sm:-right-8 lg:-right-14">
+                  <div className="relative text-xs sm:text-sm lg:text-base shadow-lg px-2 sm:px-3 py-1 sm:py-2 rounded-full text-white font-medium bg-white">
+                    <div className="absolute inset-[1px] bg-gradient-to-r from-green-500 to-pink-500 rounded-full"></div>
+                    <span className="relative z-10">
+                      Also on GrabFood & FoodPanda!
+                    </span>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -278,9 +284,10 @@ export default function Landing({
                                     </div>
                                   </div>
                                 </div>
-                                <p className="italic text-sm sm:text-base">
-                                  {testimonial.comment}
-                                </p>
+                                {/* {// TODO: SCROLL AREA FOR LONG REVIEWS} */}
+                                <ScrollArea className="italic text-sm sm:text-base min-h-52 sm:min-h-48 md:min-h-32 xl:min-h-24 p-1">
+                                  <p>{testimonial.comment}</p>
+                                </ScrollArea>
                               </CardContent>
                             </Card>
                           </MotionWrapper>{" "}
