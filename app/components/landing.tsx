@@ -215,7 +215,7 @@ export default function Landing({
                       align: "start",
                       loop: true,
                     }}
-                    // plugins={[autoplay.current]}
+                    plugins={[autoplay.current]}
                   >
                     <CarouselContent className="-ml-2 md:-ml-4">
                       {testimonials.map(
