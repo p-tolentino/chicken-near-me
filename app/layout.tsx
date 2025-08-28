@@ -28,13 +28,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="fixed inset-0 -z-10">
           <div className="absolute inset-0 bg-[url(/streets.jpg)] bg-cover bg-no-repeat bg-center" />
           <div className="absolute inset-0 bg-white/95 backdrop-blur-sm backdrop-opacity-75" />
         </div>
-        <Navbar />
+        <div className="sticky top-0 z-50">
+          <Navbar />
+        </div>
         {children}
         <Footer />
         <Toaster richColors />

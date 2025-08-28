@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -64,71 +64,94 @@ const routes = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
   const handleNavigation = () => {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      // Check if the user has scrolled down more than 10px
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      setIsScrolled(scrollTop > 10);
+    };
+
+    // Add scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="container mt-4 mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex items-center justify-between lg:justify-start">
-      {/* Logo */}
-      <h1 className="text-2xl font-bold flex items-center mr-10">
-        <Link href={"/"}>
-          <Image
-            src="/cover.png"
-            alt="Chicken Near Me Logo"
-            height={48}
-            width={160}
-            className="h-8 sm:h-10 w-auto object-contain"
-            priority
-          />
-        </Link>
-      </h1>
+    <header
+      className={`w-full mt-4 px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex items-center justify-between lg:justify-start duration-300 ease-in-out ${
+        isScrolled
+          ? "bg-gradient-to-b from-white/100 via-white/70 to-transparent backdrop-blur-md shadow-lg"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="pl-2 sm:pl-6 lg:pl-10 flex">
+        {/* Logo */}
+        <h1 className="text-2xl font-bold flex items-center mr-10">
+          <Link href={"/"}>
+            <Image
+              src="/cover.png"
+              alt="Chicken Near Me Logo"
+              height={48}
+              width={160}
+              className="h-8 sm:h-10 w-auto object-contain"
+              priority
+            />
+          </Link>
+        </h1>
 
-      {/* Desktop Navigation */}
-      <nav className="hidden lg:flex items-center gap-4">
-        {routes.map((route) => {
-          const isActive = pathname === route.href;
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-4">
+          {routes.map((route) => {
+            const isActive = pathname === route.href;
 
-          return (
-            <div className="relative" key={route.href}>
-              <Button
-                variant="link"
-                className={`text-foreground px-4 text-base ${
-                  !isActive && !route.disabled && "hover:text-primary"
-                } hover:cursor-pointer ${
-                  isActive && !route.disabled && "text-[#f2ac07]"
-                }`}
-                disabled={route.disabled}
-                asChild={!route.disabled}
-              >
-                {route.disabled ? (
-                  <span className="flex items-center gap-2 text-gray-600">
-                    <route.icon size={18} />
-                    {route.name}
-                  </span>
-                ) : (
-                  <Link href={route.href} className="flex items-center gap-2">
-                    <route.icon size={18} />
-                    {route.name}
-                  </Link>
-                )}
-              </Button>
-              {route.disabled && (
-                <div className="absolute -top-4 -right-4 z-20">
-                  <div className="relative text-xs shadow-lg px-3 py-2 rounded-full text-white font-medium bg-white">
-                    <div className="absolute inset-[1px] bg-primary rounded-full"></div>
-                    <span className="relative z-10 whitespace-nowrap">
-                      Coming soon!
+            return (
+              <div className="relative" key={route.href}>
+                <Button
+                  variant="link"
+                  className={`text-foreground px-4 text-base ${
+                    !isActive && !route.disabled && "hover:text-primary"
+                  } hover:cursor-pointer ${
+                    isActive && !route.disabled && "text-[#f2ac07]"
+                  }`}
+                  disabled={route.disabled}
+                  asChild={!route.disabled}
+                >
+                  {route.disabled ? (
+                    <span className="flex items-center gap-2 text-gray-600">
+                      <route.icon size={18} />
+                      {route.name}
                     </span>
+                  ) : (
+                    <Link href={route.href} className="flex items-center gap-2">
+                      <route.icon size={18} />
+                      {route.name}
+                    </Link>
+                  )}
+                </Button>
+                {route.disabled && (
+                  <div className="absolute -top-4 -right-4 z-20">
+                    <div className="relative text-xs shadow-lg px-3 py-2 rounded-full text-white font-medium bg-white">
+                      <div className="absolute inset-[1px] bg-primary rounded-full"></div>
+                      <span className="relative z-10 whitespace-nowrap">
+                        Coming soon!
+                      </span>
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </nav>
+                )}
+              </div>
+            );
+          })}
+        </nav>
+      </div>
 
       {/* Mobile Burger Menu */}
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
