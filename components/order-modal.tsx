@@ -7,15 +7,13 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { ChevronRight } from "lucide-react";
+import { FaChevronRight as ChevronRight } from "react-icons/fa6";
 
-import { Separator } from "@/components/ui/separator";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 

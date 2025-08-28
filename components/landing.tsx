@@ -16,7 +16,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-import { FaRecycle, FaChevronRight as ChevronRight } from "react-icons/fa6";
+import { FaRecycle } from "react-icons/fa6";
 import {
   FaRegStar as Star,
   FaStar as StarFill,
