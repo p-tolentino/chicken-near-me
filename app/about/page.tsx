@@ -2,30 +2,43 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
-
-interface MotionWrapperProps {
-  children: ReactNode;
-  delay?: number;
-}
-
-const MotionWrapper = ({ children, delay = 0 }: MotionWrapperProps) => (
-  <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay }}
-  >
-    {children}
-  </motion.div>
-);
+import { useState } from "react";
+import { MotionWrapper } from "@/components/motion-wrapper";
 
 export default function About() {
+  const [isHovered, setIsHovered] = useState(false);
+  const [rotate, setRotate] = useState({ rotateX: 0, rotateY: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = -(y - centerY) / 12;
+    const rotateY = (x - centerX) / 12;
+
+    setRotate({ rotateX, rotateY });
+  };
+
   return (
     <div className="flex flex-col min-h-fit max-h-screen">
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
         <section className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16 mb-20">
           <div className="w-full lg:w-1/2 flex justify-center">
-            <MotionWrapper>
+            <motion.div
+              className="relative"
+              style={{ perspective: 1000 }}
+              animate={{
+                rotateX: isHovered ? rotate.rotateX : 0,
+                rotateY: isHovered ? rotate.rotateY : 0,
+              }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              onMouseMove={handleMouseMove}
+              onHoverStart={() => setIsHovered(true)}
+              onHoverEnd={() => setIsHovered(false)}
+            >
               <Image
                 src="/logo.png"
                 alt="Chicken Near Me Logo"
@@ -33,7 +46,7 @@ export default function About() {
                 height={400}
                 className="object-cover"
               />
-            </MotionWrapper>
+            </motion.div>
           </div>
 
           <div className="w-full lg:w-1/2 text-center lg:text-left">
@@ -65,8 +78,8 @@ export default function About() {
                   flavorful.{" "}
                 </span>
                 <span className="font-semibold">
-                  So sit tight neighbor, Chicken Near Me is coming closer to you
-                  soon! ❤️
+                  So, sit tight neighbor, Chicken Near Me is coming closer to
+                  you soon! ❤️
                 </span>
               </p>
             </MotionWrapper>

@@ -78,7 +78,7 @@ export default function Menu() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                  <div className="flex gap-4 mt-6">
                     <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-4 rounded-xl flex-1 shadow-lg hover:shadow-xl transition-shadow duration-300">
                       <span className="text-sm font-medium opacity-90">
                         Solo Meal
@@ -150,16 +150,16 @@ export default function Menu() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                  <div className="flex gap-4 mt-6">
                     <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-4 rounded-xl flex-1 shadow-lg hover:shadow-xl transition-shadow duration-300">
                       <span className="text-sm font-medium opacity-90">
-                        6-pieces
+                        6 pieces
                       </span>
                       <div className="text-2xl font-bold">₱249</div>
                     </div>
                     <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-4 rounded-xl flex-1 shadow-lg hover:shadow-xl transition-shadow duration-300">
                       <span className="text-sm font-medium opacity-90">
-                        12-pieces
+                        12 pieces
                       </span>
                       <div className="text-2xl font-bold">₱489</div>
                     </div>

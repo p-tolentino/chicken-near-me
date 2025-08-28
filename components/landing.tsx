@@ -1,7 +1,6 @@
 "use client";
 
-import { ReactNode, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useRef } from "react";
 import Image from "next/image";
 import { GiChickenLeg, GiChefToque, GiHotSpices } from "react-icons/gi";
 import {
@@ -12,8 +11,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-
-import { Button } from "@/components/ui/button";
 
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -31,21 +28,8 @@ import {
 import { useRouter } from "next/navigation";
 import { Tables } from "@/database.types";
 import { FeedbackModal } from "./feedback-modal";
-
-interface MotionWrapperProps {
-  children: ReactNode;
-  delay?: number;
-}
-
-const MotionWrapper = ({ children, delay = 0 }: MotionWrapperProps) => (
-  <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay }}
-  >
-    {children}
-  </motion.div>
-);
+import { OrderModal } from "./order-modal";
+import { MotionWrapper } from "./motion-wrapper";
 
 const features = [
   {
@@ -75,24 +59,9 @@ export default function Landing({
 }: {
   testimonials: Tables<"testimonials">[];
 }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [rotate, setRotate] = useState({ rotateX: 0, rotateY: 0 });
   const router = useRouter();
 
   const autoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: false }));
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = -(y - centerY) / 12;
-    const rotateY = (x - centerX) / 12;
-
-    setRotate({ rotateX, rotateY });
-  };
 
   return (
     <div className="flex flex-col min-h-fit max-h-screen">
@@ -111,50 +80,52 @@ export default function Landing({
                 </p>
               </MotionWrapper>
               <MotionWrapper delay={0.4}>
-                <Button
-                  size="lg"
-                  className="bg-primary hover:cursor-pointer text-base"
-                  onClick={() =>
-                    router.push(
-                      `https://food.grab.com/ph/en/restaurant/chicken-near-me-alabang-delivery/2-C7AYAEAALYTZJ6?`
-                    )
-                  }
-                >
-                  Order Now
-                  <ChevronRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-                </Button>
+                <OrderModal />
               </MotionWrapper>
             </div>
 
             <div className="w-full sm:w-2/3 md:w-1/2 lg:w-1/3 max-w-md lg:max-w-none">
-              <motion.div
-                className="relative"
-                style={{ perspective: 1000 }}
-                animate={{
-                  rotateX: isHovered ? rotate.rotateX : 0,
-                  rotateY: isHovered ? rotate.rotateY : 0,
-                }}
-                transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                onMouseMove={handleMouseMove}
-                onHoverStart={() => setIsHovered(true)}
-                onHoverEnd={() => setIsHovered(false)}
-              >
-                <Image
-                  width={1331}
-                  height={888}
-                  src="/hero.png"
-                  alt="6-piece Original"
-                  className="rounded-3xl object-cover mx-auto w-full"
-                />
-                <div className="absolute top-4 -right-4 sm:top-4 sm:-right-8 lg:top-10 lg:-right-16">
-                  <div className="relative text-xs sm:text-sm lg:text-base shadow-lg px-2 sm:px-3 py-1 sm:py-2 rounded-full text-white font-medium bg-white">
-                    <div className="absolute inset-[1px] bg-gradient-to-r from-green-500 to-pink-500 rounded-full"></div>
-                    <span className="relative z-10">
-                      Also on GrabFood & FoodPanda!
-                    </span>
+              <div className="relative">
+                <MotionWrapper>
+                  <Image
+                    width={1331}
+                    height={888}
+                    src="/hero.png"
+                    alt="6-piece Original"
+                    className="rounded-3xl object-cover mx-auto w-full"
+                  />
+                  <div className="absolute top-4 -right-4 sm:top-4 sm:-right-8 lg:top-6 lg:-right-12">
+                    <div className="group relative text-xs sm:text-sm lg:text-base shadow-lg px-2 sm:px-3 py-1 sm:py-2 rounded-full text-white font-medium bg-white">
+                      <div className="absolute inset-[1px] bg-primary rounded-full group-hover:bg-red-200 transition-all"></div>
+                      <span className="relative z-10">
+                        Also on{" "}
+                        <span
+                          className="group-hover:text-green-600/90 group-hover:text-shadow-lg group-hover:text-shadow-green-300 group-hover:underline hover:cursor-pointer transition-all"
+                          onClick={() =>
+                            router.push(
+                              `https://food.grab.com/ph/en/restaurant/chicken-near-me-alabang-delivery/2-C7AYAEAALYTZJ6?`
+                            )
+                          }
+                        >
+                          GrabFood
+                        </span>{" "}
+                        &{" "}
+                        <span
+                          className="group-hover:text-pink-500 group-hover:text-shadow-lg group-hover:text-shadow-pink-300 group-hover:underline hover:cursor-pointer transition-all"
+                          onClick={() =>
+                            router.push(
+                              `https://www.foodpanda.ph/restaurant/gjq9/chicken-near-me-alabang`
+                            )
+                          }
+                        >
+                          FoodPanda
+                        </span>
+                        !
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
+                </MotionWrapper>
+              </div>
             </div>
           </div>
         </section>
