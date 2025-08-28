@@ -1,5 +1,5 @@
 import { getTestimonials } from "./data/testimonials";
-import Landing from "./components/landing";
+import Landing from "../components/landing";
 
 export default async function Home() {
   const testimonials = await getTestimonials();

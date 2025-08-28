@@ -2,7 +2,6 @@
 
 import { ReactNode, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
 import { GiChickenLeg, GiChefToque, GiHotSpices } from "react-icons/gi";
 import {
@@ -17,14 +16,9 @@ import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-import {
-  FaFacebookF as Facebook,
-  FaInstagram as Instagram,
-  FaLocationDot as LocationPin,
-} from "react-icons/fa6";
 import { FaRecycle, FaChevronRight as ChevronRight } from "react-icons/fa6";
 import {
   FaRegStar as Star,
@@ -84,6 +78,7 @@ export default function Landing({
   const [isHovered, setIsHovered] = useState(false);
   const [rotate, setRotate] = useState({ rotateX: 0, rotateY: 0 });
   const router = useRouter();
+
   const autoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: false }));
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -100,20 +95,7 @@ export default function Landing({
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex justify-between items-center">
-        <h1 className="text-2xl font-bold flex items-center ">
-          <Image
-            src="/cover.png"
-            alt="Chicken Near Me Logo"
-            height={48}
-            width={160}
-            className="h-10 w-auto object-contain"
-            priority
-          />
-        </h1>
-      </header>
-
+    <div className="flex flex-col min-h-fit max-h-screen">
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex-grow">
         <section className="mb-16 sm:mb-20 lg:mb-24">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-12">
@@ -160,11 +142,11 @@ export default function Landing({
                 <Image
                   width={1331}
                   height={888}
-                  src="/logo.png"
-                  alt="Chicken Near Me Logo"
+                  src="/hero.png"
+                  alt="6-piece Original"
                   className="rounded-3xl object-cover mx-auto w-full"
                 />
-                <div className="absolute top-4 sm:top-8 lg:top-16 -right-4 sm:-right-8 lg:-right-14">
+                <div className="absolute top-4 -right-4 sm:top-4 sm:-right-8 lg:top-10 lg:-right-16">
                   <div className="relative text-xs sm:text-sm lg:text-base shadow-lg px-2 sm:px-3 py-1 sm:py-2 rounded-full text-white font-medium bg-white">
                     <div className="absolute inset-[1px] bg-gradient-to-r from-green-500 to-pink-500 rounded-full"></div>
                     <span className="relative z-10">
@@ -223,7 +205,7 @@ export default function Landing({
                           !testimonial.is_archived && (
                             <CarouselItem
                               key={index}
-                              className={`w-full ${
+                              className={`w-full min-h-full ${
                                 testimonials.length > 1 && `lg:basis-1/2`
                               } pl-2 md:pl-4`}
                             >
@@ -288,8 +270,9 @@ export default function Landing({
                                         </div>
                                       </div>
                                     </div>
+                                    {/* Adjust for Long Reviews */}
                                     {/* {// TODO: SCROLL AREA FOR LONG REVIEWS} */}
-                                    <ScrollArea className="italic text-sm sm:text-base min-h-52 sm:min-h-48 md:min-h-32 xl:min-h-24 p-1">
+                                    <ScrollArea className="italic text-sm sm:text-base min-h-52 sm:min-h-48 md:min-h-32 xl:min-h-24 p-1 max-h-24 overflow-auto">
                                       <p>{testimonial.comment}</p>
                                     </ScrollArea>
                                   </CardContent>
@@ -325,47 +308,6 @@ export default function Landing({
           <FeedbackModal />
         </section>
       </main>
-
-      <footer className="bg-primary text-white">
-        <div className="flex flex-col sm:flex-row h-auto sm:h-16 items-center justify-center sm:justify-around w-full gap-4 sm:gap-0 py-4 sm:py-0">
-          <div className="w-full sm:w-auto">
-            <Link
-              href={`https://www.facebook.com/chickennearme`}
-              target="_blank"
-              className="flex bg-white-500 container mx-auto px-4 text-center items-center justify-center sm:justify-start hover:opacity-80 transition-opacity"
-            >
-              <Facebook className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" />
-              <p className="ml-2 sm:ml-3 text-sm sm:text-base">
-                Chicken Near Me
-              </p>
-            </Link>
-          </div>
-          <div className="w-full sm:w-auto">
-            <Link
-              href={`https://www.instagram.com/chickennearmeph`}
-              target="_blank"
-              className="flex bg-white-500 container mx-auto px-4 text-center items-center justify-center sm:justify-start hover:opacity-80 transition-opacity"
-            >
-              <Instagram className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" />
-              <p className="ml-2 sm:ml-3 text-sm sm:text-base">
-                @chickennearmeph
-              </p>
-            </Link>
-          </div>
-          <div className="w-full sm:w-auto">
-            <Link
-              href={`https://maps.app.goo.gl/KTHzbW9gNNg2xzNF8`}
-              target="_blank"
-              className="flex bg-white-500 container mx-auto px-4 text-center items-center justify-center sm:justify-start hover:opacity-80 transition-opacity"
-            >
-              <LocationPin className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" />
-              <p className="ml-2 sm:ml-3 text-sm sm:text-base">
-                Chicken Near Me, Alabang
-              </p>
-            </Link>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

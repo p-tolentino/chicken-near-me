@@ -32,7 +32,7 @@ import { Switch } from "@/components/ui/switch";
 
 import { Separator } from "@/components/ui/separator";
 import { Rating } from "@/components/ui/rating";
-import { createCustomerFeedback } from "../actions/testimonials";
+import { createCustomerFeedback } from "../app/actions/testimonials";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 

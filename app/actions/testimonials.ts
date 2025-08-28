@@ -2,7 +2,7 @@
 
 import { createClient } from "@/utils/supabase/server";
 import { z } from "zod";
-import { FeedbackFormSchema } from "../components/feedback-modal";
+import { FeedbackFormSchema } from "../../components/feedback-modal";
 
 export const createCustomerFeedback = async ({
   anonymous,
