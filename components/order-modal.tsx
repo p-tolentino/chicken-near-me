@@ -72,7 +72,7 @@ export function OrderModal() {
                     <Image
                       width={1331}
                       height={888}
-                      src="/foodpanda.png"
+                      src="/foodpanda.svg"
                       alt="FoodPanda"
                       className="rounded-3xl object-cover mx-auto w-full"
                     />

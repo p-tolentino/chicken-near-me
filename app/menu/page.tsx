@@ -3,9 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
-import { Button } from "@/components/ui/button";
-import { FaChevronRight as ChevronRight } from "react-icons/fa6";
-import { useRouter } from "next/navigation";
+import { OrderModal } from "@/components/order-modal";
 
 interface MotionWrapperProps {
   children: ReactNode;
@@ -32,8 +30,6 @@ const flavors = [
 ];
 
 export default function Menu() {
-  const router = useRouter();
-
   return (
     <div className="flex flex-col min-h-fit max-h-screen">
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
@@ -93,18 +89,7 @@ export default function Menu() {
                     </div>
                   </div>
 
-                  <Button
-                    size="lg"
-                    className="bg-[#f2ac07] hover:bg-[#dd9e0a] hover:cursor-pointer text-base mt-10"
-                    onClick={() =>
-                      router.push(
-                        `https://food.grab.com/ph/en/restaurant/chicken-near-me-alabang-delivery/2-C7AYAEAALYTZJ6?`
-                      )
-                    }
-                  >
-                    Order Now
-                    <ChevronRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-                  </Button>
+                  <OrderModal />
                 </div>
               </MotionWrapper>
             </div>
@@ -165,18 +150,7 @@ export default function Menu() {
                     </div>
                   </div>
 
-                  <Button
-                    size="lg"
-                    className="bg-[#f2ac07] hover:bg-[#dd9e0a] hover:cursor-pointer text-base mt-10"
-                    onClick={() =>
-                      router.push(
-                        `https://food.grab.com/ph/en/restaurant/chicken-near-me-alabang-delivery/2-C7AYAEAALYTZJ6?`
-                      )
-                    }
-                  >
-                    Order Now
-                    <ChevronRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-                  </Button>
+                  <OrderModal />
                 </div>
               </MotionWrapper>
             </div>

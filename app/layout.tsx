@@ -17,7 +17,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Chicken Near Me",
-  description: "No bones, all flavor",
+  description:
+    "No bones, all flavor - A brand new boneless chicken shop opened at Filinvest, Alabang, Muntinlupa City and soon coming Near You",
 };
 
 export default function RootLayout({
