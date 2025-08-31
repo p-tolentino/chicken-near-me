@@ -32,7 +32,7 @@ import { Switch } from "@/components/ui/switch";
 
 import { Separator } from "@/components/ui/separator";
 import { Rating } from "@/components/ui/rating";
-import { createCustomerFeedback } from "../app/actions/testimonials";
+import { createCustomerFeedback } from "../actions/testimonials";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 
@@ -91,7 +91,7 @@ export function FeedbackModal() {
           size="lg"
           className="bg-[#f2ac07] hover:bg-[#dd9e0a] hover:cursor-pointer sm:text-base px-6 sm:px-8 py-3 sm:py-4"
         >
-          Give Feedback <ChevronRight className="ml-2 h-4 w-4" />
+          Leave a Review <ChevronRight className="ml-2 h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent className="">
