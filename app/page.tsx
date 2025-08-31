@@ -1,4 +1,4 @@
-import { getTestimonials } from "./data/testimonials";
+import { getTestimonials } from "../data/testimonials";
 import Landing from "../components/landing";
 
 export default async function Home() {
