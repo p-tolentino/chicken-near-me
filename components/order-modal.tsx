@@ -33,7 +33,7 @@ export function OrderModal() {
       </DialogTrigger>
       <DialogContent className="">
         <DialogHeader>
-          <DialogTitle>Choose which platform to order from</DialogTitle>
+          <DialogTitle>Where do you want to order from?</DialogTitle>
           <div className="grid grid-cols-2 gap-4 mt-5">
             <div className="h-full group">
               <Card

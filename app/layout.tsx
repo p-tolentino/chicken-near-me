@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import NavbarCustomTest from "@/components/custom-nav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +37,8 @@ export default function RootLayout({
           <div className="absolute inset-0 bg-white/95 backdrop-blur-sm backdrop-opacity-75" />
         </div>
         <div className="sticky top-0 z-50">
-          <Navbar />
+          {/* <Navbar /> */}
+          <NavbarCustomTest />
         </div>
         {children}
         <Footer />
