@@ -47,11 +47,11 @@ const features = [
     title: "Culinary Craftsmanship",
     description: "Each piece is a masterpiece, crafted with expertise.",
   },
-  {
-    icon: FaRecycle,
-    title: "Eco-Friendly Packaging",
-    description: "Saving the planet, one chicken bucket at a time!",
-  },
+  // {
+  //   icon: FaRecycle,
+  //   title: "Eco-Friendly Packaging",
+  //   description: "Saving the planet, one chicken bucket at a time!",
+  // },
 ];
 
 export default function Landing({
@@ -139,7 +139,7 @@ export default function Landing({
           <h3 className="text-2xl sm:text-3xl font-bold mb-8 text-center">
             What Makes Our Chicken Clucking Amazing
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-6">
             {features.map((feature, index) => (
               <MotionWrapper key={index} delay={index * 0.1}>
                 <Card className="w-full h-full shadow-md hover:shadow-lg transition-shadow">
