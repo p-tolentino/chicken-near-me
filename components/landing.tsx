@@ -80,7 +80,12 @@ export default function Landing({
                 </p>
               </MotionWrapper>
               <MotionWrapper delay={0.4}>
-                <OrderModal />
+                <span className="flex gap-2 justify-center lg:justify-start">
+                  <OrderModal />
+                  {/* <Button size="lg" variant={"outline"} className="text-base">
+                    Join Our Team &gt;
+                  </Button> */}
+                </span>
               </MotionWrapper>
             </div>
 
