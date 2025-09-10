@@ -24,7 +24,7 @@ export default function About() {
 
   return (
     <div className="flex flex-col min-h-fit max-h-screen">
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-12 flex-grow">
         <section className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16 mb-20">
           <div className="w-full lg:w-1/2 flex justify-center">
             <motion.div

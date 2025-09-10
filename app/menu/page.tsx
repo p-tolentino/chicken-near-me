@@ -32,7 +32,7 @@ const flavors = [
 export default function Menu() {
   return (
     <div className="flex flex-col min-h-fit max-h-screen">
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-12 flex-grow">
         <section className="flex flex-col items-center gap-10 lg:gap-16 mb-20">
           {/* Rice Meals Section */}
           <div className="w-full flex flex-col lg:flex-row bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-3xl transition-all duration-500 border border-orange-100">

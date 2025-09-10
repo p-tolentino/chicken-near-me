@@ -16,7 +16,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-import { FaRecycle } from "react-icons/fa6";
+// import { FaRecycle } from "react-icons/fa6";
 import {
   FaRegStar as Star,
   FaStar as StarFill,
@@ -28,8 +28,8 @@ import {
 import { useRouter } from "next/navigation";
 import { Tables } from "@/database.types";
 import { FeedbackModal } from "./feedback-modal";
-import { OrderModal } from "./order-modal";
-import { MotionWrapper } from "./motion-wrapper";
+import { OrderModal } from "../order-modal";
+import { MotionWrapper } from "../motion-wrapper";
 
 const features = [
   {
@@ -65,7 +65,7 @@ export default function Landing({
 
   return (
     <div className="flex flex-col min-h-fit max-h-screen">
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex-grow">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 flex-grow">
         <section className="mb-16 sm:mb-20 lg:mb-24">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-12">
             <div className="w-full lg:w-1/2 text-center lg:text-left">
@@ -101,8 +101,8 @@ export default function Landing({
                   />
                   <div className="absolute top-4 -right-4 sm:top-4 sm:-right-8 lg:top-6 lg:-right-12">
                     <div className="group relative text-xs sm:text-sm lg:text-base shadow-lg px-2 sm:px-3 py-1 sm:py-2 rounded-full text-white font-medium bg-white">
-                      <div className="absolute inset-[1px] bg-primary rounded-full group-hover:bg-red-200 transition-all"></div>
-                      <span className="relative z-10">
+                      <div className="absolute inset-[1px] bg-primary rounded-full group-hover:opacity-10 transition-all"></div>
+                      <span className="relative z-10 group-hover:text-gray-400 transition-all">
                         Also on{" "}
                         <span
                           className="group-hover:text-green-600/90 group-hover:text-shadow-lg group-hover:text-shadow-green-300 group-hover:underline hover:cursor-pointer transition-all"
