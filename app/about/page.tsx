@@ -29,7 +29,7 @@ export default function About() {
           <div className="w-full lg:w-1/2 flex justify-center">
             <motion.div
               className="relative"
-              style={{ perspective: 1000 }}
+              style={{ perspective: 100 }}
               animate={{
                 rotateX: isHovered ? rotate.rotateX : 0,
                 rotateY: isHovered ? rotate.rotateY : 0,
