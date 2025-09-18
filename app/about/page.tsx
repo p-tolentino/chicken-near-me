@@ -29,12 +29,12 @@ export default function About() {
           <div className="w-full lg:w-1/2 flex justify-center">
             <motion.div
               className="relative"
-              style={{ perspective: 100 }}
+              style={{ perspective: 1000 }}
               animate={{
                 rotateX: isHovered ? rotate.rotateX : 0,
                 rotateY: isHovered ? rotate.rotateY : 0,
               }}
-              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              transition={{ type: "spring", stiffness: 600, damping: 200 }}
               onMouseMove={handleMouseMove}
               onHoverStart={() => setIsHovered(true)}
               onHoverEnd={() => setIsHovered(false)}
