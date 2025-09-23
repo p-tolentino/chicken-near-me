@@ -35,7 +35,7 @@ const data = {
     email: "hello@chicken-nearme.com",
     // phone: "+63 8637373116",
     address:
-      "Chicken Near Me Alabang, 111, Civic Prime, Building Civic Dr, Muntinlupa, 1771 Metro Manila",
+      "Chicken Near Me Alabang, 111, Civic Prime Building, Civic Dr., Muntinlupa, 1771 Metro Manila",
   },
   company: {
     name: "Chicken Near Me",
