@@ -179,11 +179,11 @@ export default function Menu({
             </div>
 
             <div className="flex w-full md:hidden" ref={dropdownRef}>
-              <div className="relative w-full">
+              <div className="relative w-full py-1">
                 {/* Dropdown Trigger */}
                 <Button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="flex items-center justify-between w-full rounded-full text-foreground border border-gray-300 bg-white px-4 py-2 text-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#f2ac07] focus:ring-offset-2 transition-all duration-200"
+                  className="flex items-center justify-between w-full rounded-full text-foreground border border-gray-300 bg-white px-6 py-6 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#f2ac07] focus:ring-offset-2 transition-all duration-200 text-base"
                 >
                   <span className="font-medium">{currentCategoryName}</span>
                   <motion.div
@@ -218,7 +218,7 @@ export default function Menu({
                               key={category.code}
                               href={`/menu?category=${category.code}`}
                               onClick={() => setIsDropdownOpen(false)}
-                              className={`flex rounded-full items-center px-4 py-3 text-sm transition-all  hover:bg-[#f2ac07]/80 ${
+                              className={`flex rounded-full items-center px-4 py-2 text-sm transition-all  hover:bg-[#f2ac07]/80 ${
                                 activeCategory === category.code
                                   ? "bg-primary text-background font-semibold"
                                   : " hover:bg-[#f2ac07]/80"
@@ -236,13 +236,19 @@ export default function Menu({
             </div>
           </div>
 
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-            {categories.map(
-              (category) =>
-                category.code === activeCategory &&
-                category.products.map((item) => (
-                  <MenuCard key={item.name} item={item} />
-                ))
+          <div className="w-full">
+            {productsToShow.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+                {productsToShow.map((item) => (
+                  <MenuCard key={`${item.name}-${item.type}`} item={item} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-lg text-muted-foreground">
+                  No products found for this category.
+                </p>
+              </div>
             )}
           </div>
         </section>
