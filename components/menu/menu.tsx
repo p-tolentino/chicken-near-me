@@ -3,6 +3,13 @@
 import MenuCard from "@/components/menu/menu-card";
 import Link from "next/link";
 import { use, useEffect, useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const categories = [
   {
@@ -130,13 +137,13 @@ export default function Menu({
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-12 flex-grow">
         <section className="flex flex-col items-center gap-10 lg:gap-16 mb-20">
           <div
-            className={`min-w-screen px-4 sm:px-20 md:px-28 lg:px-36 xl:px-48 sticky w-full top-18 sm:top-22 z-10 ${
+            className={`min-w-screen px-4 sm:px-20 md:px-28 lg:px-36 xl:px-48 sticky w-full top-16 sm:top-22 z-10 ${
               isScrolled
                 ? "bg-gradient-to-b from-transparent/100 via-white/70 to-white/100 backdrop-blur-md shadow-lg"
                 : "bg-transparent"
-            } pb-3 pt-3 flex justify-center `}
+            } pb-3 pt-3 flex justify-center`}
           >
-            <div className="flex gap-2 lg:px-4 xl:-mx-4 sm:px-0 sm:mx-0 sm:flex-wrap">
+            <div className="hidden md:flex gap-2 lg:px-4 xl:-mx-4 sm:px-0 sm:mx-0 sm:flex-wrap">
               {categories.map((category) => (
                 <Link
                   key={category.code}
@@ -149,6 +156,31 @@ export default function Menu({
                   {category.name}
                 </Link>
               ))}
+            </div>
+            <div className="flex w-full md:hidden">
+              <Select
+                onValueChange={(value) => {
+                  window.location.href = `/menu?category=${value}`;
+                }}
+                value={activeCategory}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select Category">
+                    {activeCategory
+                      ? categories.find(
+                          (category) => category.code === activeCategory
+                        )?.name
+                      : "Select Category"}
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((category) => (
+                    <SelectItem value={category.code} key={category.code}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
