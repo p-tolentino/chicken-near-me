@@ -2,7 +2,7 @@
 
 import MenuCard from "@/components/menu/menu-card";
 import Link from "next/link";
-import { use } from "react";
+import { use, useEffect, useState } from "react";
 
 const categories = [
   {
@@ -106,7 +106,22 @@ export default function Menu({
 }: {
   searchParams: Promise<{ category?: string }>;
 }) {
+  const [isScrolled, setIsScrolled] = useState(false);
   const params = use(searchParams);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Check if the user has scrolled down more than 10px
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      setIsScrolled(scrollTop > 10);
+    };
+
+    // Add scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const activeCategory = params.category;
 
@@ -114,19 +129,27 @@ export default function Menu({
     <div className="flex flex-col min-h-fit max-h-screen">
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-12 flex-grow">
         <section className="flex flex-col items-center gap-10 lg:gap-16 mb-20">
-          <div className="w-full flex gap-4">
-            {categories.map((category) => (
-              <Link
-                key={category.code}
-                href={`/menu?category=${category.code}`}
-                className={`rounded-full px-4 py-2 border hover:bg-[#f2ac07]/80 ${
-                  activeCategory === category.code &&
-                  `bg-primary text-background font-semibold`
-                } transition-all`}
-              >
-                {category.name}
-              </Link>
-            ))}
+          <div
+            className={`min-w-screen px-4 sm:px-20 md:px-28 lg:px-36 xl:px-48 sticky w-full top-18 sm:top-22 z-10 ${
+              isScrolled
+                ? "bg-gradient-to-b from-transparent/100 via-white/70 to-white/100 backdrop-blur-md shadow-lg"
+                : "bg-transparent"
+            } pb-3 pt-3 flex justify-center `}
+          >
+            <div className="flex gap-2 lg:px-4 xl:-mx-4 sm:px-0 sm:mx-0 sm:flex-wrap">
+              {categories.map((category) => (
+                <Link
+                  key={category.code}
+                  href={`/menu?category=${category.code}`}
+                  className={`rounded-full px-4 py-2 border whitespace-nowrap hover:bg-[#f2ac07]/80 ${
+                    activeCategory === category.code &&
+                    `bg-primary text-background font-semibold`
+                  } transition-all flex-shrink-0 sm:flex-shrink`}
+                >
+                  {category.name}
+                </Link>
+              ))}
+            </div>
           </div>
 
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
