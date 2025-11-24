@@ -2,14 +2,10 @@
 
 import MenuCard from "@/components/menu/menu-card";
 import Link from "next/link";
-import { use, useEffect, useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { use, useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import { Button } from "../ui/button";
 
 const categories = [
   {
@@ -114,6 +110,8 @@ export default function Menu({
   searchParams: Promise<{ category?: string }>;
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const params = use(searchParams);
 
   useEffect(() => {
@@ -123,14 +121,36 @@ export default function Menu({
       setIsScrolled(scrollTop > 10);
     };
 
-    // Add scroll event listener
-    window.addEventListener("scroll", handleScroll);
+    // Close dropdown when clicking outside
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
 
-    // Clean up
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const activeCategory = params.category;
+
+  const currentCategoryName =
+    activeCategory &&
+    categories.find((category) => category.code === activeCategory)?.name;
+
+  const productsToShow =
+    (activeCategory &&
+      categories.find((category) => category.code === activeCategory)
+        ?.products) ||
+    [];
 
   return (
     <div className="flex flex-col min-h-fit max-h-screen">
@@ -157,30 +177,62 @@ export default function Menu({
                 </Link>
               ))}
             </div>
-            <div className="flex w-full md:hidden">
-              <Select
-                onValueChange={(value) => {
-                  window.location.href = `/menu?category=${value}`;
-                }}
-                value={activeCategory}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select Category">
-                    {activeCategory
-                      ? categories.find(
-                          (category) => category.code === activeCategory
-                        )?.name
-                      : "Select Category"}
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((category) => (
-                    <SelectItem value={category.code} key={category.code}>
-                      {category.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+
+            <div className="flex w-full md:hidden" ref={dropdownRef}>
+              <div className="relative w-full">
+                {/* Dropdown Trigger */}
+                <Button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="flex items-center justify-between w-full rounded-full text-foreground border border-gray-300 bg-white px-4 py-2 text-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#f2ac07] focus:ring-offset-2 transition-all duration-200"
+                >
+                  <span className="font-medium">{currentCategoryName}</span>
+                  <motion.div
+                    animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <ChevronDown className="h-4 w-4" />
+                  </motion.div>
+                </Button>
+
+                {/* Dropdown Menu */}
+                <AnimatePresence>
+                  {isDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95, y: -8 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, y: -8 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                      className="absolute top-full left-0 right-0 z-50 mt-2 w-full rounded-2xl border border-gray-200 bg-white shadow-lg overflow-hidden"
+                    >
+                      {" "}
+                      <motion.div className="py-2">
+                        {categories.map((category, index) => (
+                          <motion.div
+                            key={category.code}
+                            initial={{ x: -10, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ delay: 0.05 + (index + 1) * 0.03 }}
+                            className="px-2 my-1"
+                          >
+                            <Link
+                              key={category.code}
+                              href={`/menu?category=${category.code}`}
+                              onClick={() => setIsDropdownOpen(false)}
+                              className={`flex rounded-full items-center px-4 py-3 text-sm transition-all  hover:bg-[#f2ac07]/80 ${
+                                activeCategory === category.code
+                                  ? "bg-primary text-background font-semibold"
+                                  : " hover:bg-[#f2ac07]/80"
+                              }`}
+                            >
+                              {category.name}
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </div>
 
