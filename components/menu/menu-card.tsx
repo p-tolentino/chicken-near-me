@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -9,6 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
@@ -61,6 +63,7 @@ const MotionWrapper = ({ children, delay = 0 }: MotionWrapperProps) => (
 );
 
 const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
+  const [imageLoading, setImageLoading] = useState(true);
   const placeholderLink = "/chicken-bg.png";
 
   const getFlavorText = () => {
@@ -102,16 +105,22 @@ const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
 
         <CardContent className="flex-grow flex items-center justify-center pb-3">
           <MotionWrapper delay={0.2}>
-            <Image
-              src={item.src || placeholderLink}
-              priority
-              width={300}
-              height={300}
-              alt={item.name}
-              className={`object-cover rounded-md hover:scale-105 transition-transform duration-500 ${
-                item.comingSoon && "opacity-20 "
-              }`}
-            />
+            <div className="relative w-[300px] h-[300px]">
+              {imageLoading && (
+                <Skeleton className="w-[300px] h-[300px] rounded-md" />
+              )}
+              <Image
+                src={item.src || placeholderLink}
+                priority
+                width={300}
+                height={300}
+                alt={item.name}
+                onLoad={() => setImageLoading(false)}
+                className={`object-cover rounded-md hover:scale-105 transition-transform duration-500 ${
+                  item.comingSoon && "opacity-20"
+                }`}
+              />
+            </div>
           </MotionWrapper>
         </CardContent>
 
