@@ -1,12 +1,4 @@
-import { Label } from "@radix-ui/react-label";
-import {
-  Facebook,
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-} from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -57,18 +49,9 @@ const aboutLinks = [
   // { text: "Careers", href: data.about.careers },
 ];
 
-const serviceLinks = [
-  { text: "Menu", href: data.services.menu },
-  // { text: "Web Design", href: data.services.webdesign },
-  // { text: "Marketing", href: data.services.marketing },
-  // { text: "Google Ads", href: data.services.googleads },
-];
+const serviceLinks = [{ text: "Menu", href: data.services.menu }];
 
-const helpfulLinks = [
-  { text: "FAQs", href: data.help.faqs },
-  // { text: "Support", href: data.help.support },
-  // { text: "Live Chat", href: data.help.livechat, hasIndicator: true },
-];
+const helpfulLinks = [{ text: "FAQs", href: data.help.faqs }];
 
 const contactInfo = [
   {
