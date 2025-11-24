@@ -44,9 +44,17 @@ const flavors = {
   ],
   sodaCan: ["Coke", "Coke Zero", "Sprite", "Royal"],
   flavored: ["Lychee", "Four Seasons", "Strawberry", "Blue Lemonade"],
+  sauce: [
+    "Original",
+    "Honey Mustard",
+    "Honey Sriracha",
+    "Hickory Barbecue",
+    "Classic Buffalo",
+    "Soy Garlic",
+  ],
 };
 
-const flavoredTypes = ["chicken", "sodaCan", "flavored"];
+const flavoredTypes = ["chicken", "sodaCan", "flavored", "sauce"];
 
 interface MotionWrapperProps {
   children: ReactNode;
@@ -77,6 +85,8 @@ const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
         ? flavors.sodaCan
         : item.type === "flavored"
         ? flavors.flavored
+        : item.type === "sauce"
+        ? flavors.sauce
         : [];
 
     return `Available Flavors: ${flavorList.join(", ")}`;

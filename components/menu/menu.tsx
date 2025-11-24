@@ -59,7 +59,7 @@ const categories = [
     products: [
       { type: "sides", name: "Fries", price: 40, src: "/addons/fries.png" },
       {
-        type: "chicken",
+        type: "sauce",
         name: "Extra Sauce",
         price: 25,
         src: "/addons/sauce.jpg",
