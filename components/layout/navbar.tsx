@@ -58,7 +58,7 @@ const routes = [
   },
   {
     name: "Menu",
-    href: "/menu",
+    href: "/menu?category=rice",
     icon: FaUtensils,
     disabled: false,
   },
