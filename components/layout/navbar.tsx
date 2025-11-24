@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import {
   FaCircleInfo,
-  FaCircleQuestion,
   FaGlobe,
   FaHandshakeSimple,
   FaHouse,

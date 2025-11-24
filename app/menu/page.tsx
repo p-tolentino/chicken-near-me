@@ -1,159 +1,137 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
-import { OrderModal } from "@/components/order-modal";
+import { useSearchParams } from "next/navigation";
+import MenuCard from "@/components/menu/menu-card";
+import Link from "next/link";
 
-interface MotionWrapperProps {
-  children: ReactNode;
-  delay?: number;
-}
-
-const MotionWrapper = ({ children, delay = 0 }: MotionWrapperProps) => (
-  <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay }}
-  >
-    {children}
-  </motion.div>
-);
-
-const flavors = [
-  "Original",
-  "Honey Mustard",
-  "Honey Sriracha",
-  "Hickory Barbecue",
-  "Classic Buffalo",
-  "Garlic Parmesan",
+const categories = [
+  {
+    code: "rice",
+    name: "Rice Meals",
+    products: [
+      {
+        type: "chicken",
+        name: "Solo Meal",
+        price: 119,
+        src: "/chicken/solo.png",
+      },
+      {
+        type: "chicken",
+        name: "Jumbo Meal",
+        price: 209,
+        src: "/chicken/jumbo.png",
+      },
+      {
+        type: "chicken",
+        name: "Solo Combo Meal",
+        price: 199,
+        src: "/chicken/solo-combo.png",
+      },
+      {
+        type: "chicken",
+        name: "Jumbo Combo Meal",
+        price: 289,
+        src: "/chicken/jumbo-combo.png",
+      },
+    ],
+  },
+  {
+    code: "group",
+    name: "Group Meals",
+    products: [
+      {
+        type: "chicken",
+        name: "6pcs. (1 Flavor)",
+        price: 279,
+        src: "/chicken/6.png",
+      },
+      {
+        type: "chicken",
+        name: "12pcs. (2 Flavors)",
+        price: 549,
+        src: "/chicken/12.jpg",
+      },
+    ],
+  },
+  {
+    code: "addons",
+    name: "Add-ons",
+    products: [
+      { type: "sides", name: "Fries", price: 40, src: "/addons/fries.png" },
+      {
+        type: "chicken",
+        name: "Extra Sauce",
+        price: 25,
+        src: "/addons/sauce.jpg",
+      },
+      { type: "sides", name: "Extra Rice", price: 25, src: "/addons/rice.jpg" },
+    ],
+  },
+  {
+    code: "drinks",
+    name: "Drinks",
+    products: [
+      {
+        type: "sodaCan",
+        name: "Soda in Can",
+        price: 50,
+        src: "/drinks/soda.jpg",
+      },
+      {
+        type: "flavored",
+        name: "Flavored Soda (16 oz.)",
+        price: 60,
+        src: "/drinks/flavored.png",
+      },
+      {
+        type: "flavored",
+        name: "Flavored Soda (22 oz.)",
+        price: 80,
+        src: "/drinks/flavored.png",
+      },
+      {
+        type: "coffee",
+        name: "Iced Coffee",
+        price: "-",
+        comingSoon: true,
+        src: "/drinks/coffee.png",
+      },
+    ],
+  },
 ];
 
 export default function Menu() {
+  const searchParams = useSearchParams();
+
+  const activeCategory = searchParams.get("category");
+
   return (
     <div className="flex flex-col min-h-fit max-h-screen">
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-12 flex-grow">
         <section className="flex flex-col items-center gap-10 lg:gap-16 mb-20">
-          {/* Rice Meals Section */}
-          <div className="w-full flex flex-col lg:flex-row bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-3xl transition-all duration-500 border border-orange-100">
-            <div className="w-full lg:w-1/2 flex justify-center items-center p-8 bg-gradient-to-br from-orange-100 to-red-100">
-              <MotionWrapper>
-                <div className="relative group">
-                  <Image
-                    src="/rice-meals.png"
-                    alt="Rice Meals"
-                    width={600}
-                    height={400}
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-              </MotionWrapper>
-            </div>
-
-            <div className="w-full lg:w-1/2 flex flex-col justify-center p-8 lg:p-12 text-center lg:text-left">
-              <MotionWrapper delay={0.1}>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-                  Rice Meals
-                </h1>
-              </MotionWrapper>
-              <MotionWrapper delay={0.2}>
-                <div className="space-y-4 text-gray-700">
-                  <p className="text-lg sm:text-xl leading-relaxed">
-                    Hearty and satisfying rice meals served with your choice of
-                    premium protein and our signature sauces.
-                  </p>
-
-                  <div className="bg-orange-50 p-4 rounded-xl border-l-4 border-orange-500">
-                    <h3 className="font-semibold text-red-800 mb-2">
-                      Available Flavors:
-                    </h3>
-                    <div className="text-red-700 grid grid-cols-2 lg:grid-cols-3">
-                      {flavors.map((flavor) => (
-                        <p key={flavor}>{flavor}</p>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4 mt-6">
-                    <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-4 rounded-xl flex-1 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                      <span className="text-sm font-medium opacity-90">
-                        Solo Meal
-                      </span>
-                      <div className="text-2xl font-bold">₱119</div>
-                    </div>
-                    <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-4 rounded-xl flex-1 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                      <span className="text-sm font-medium opacity-90">
-                        Jumbo Meal
-                      </span>
-                      <div className="text-2xl font-bold">₱209</div>
-                    </div>
-                  </div>
-
-                  <OrderModal />
-                </div>
-              </MotionWrapper>
-            </div>
+          <div className="w-full flex gap-4">
+            {categories.map((category) => (
+              <Link
+                key={category.code}
+                href={`/menu?category=${category.code}`}
+                className={`rounded-full px-4 py-2 border hover:bg-[#f2ac07]/80 ${
+                  activeCategory === category.code &&
+                  `bg-primary text-background font-semibold`
+                } transition-all`}
+              >
+                {category.name}
+              </Link>
+            ))}
           </div>
 
-          {/* Group Packs Section */}
-          <div className="w-full flex flex-col lg:flex-row-reverse bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-3xl transition-all duration-500 border border-red-100">
-            <div className="w-full lg:w-1/2 flex justify-center items-center p-8 bg-gradient-to-br from-red-100 to-orange-100">
-              <MotionWrapper delay={0.3}>
-                <div className="relative group">
-                  <Image
-                    src="/group-packs.png"
-                    alt="Group Packs"
-                    width={600}
-                    height={400}
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-              </MotionWrapper>
-            </div>
-
-            <div className="w-full lg:w-1/2 flex flex-col justify-center p-8 lg:p-12 text-center lg:text-right">
-              <MotionWrapper delay={0.4}>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
-                  Group Packs
-                </h1>
-              </MotionWrapper>
-              <MotionWrapper delay={0.5}>
-                <div className="space-y-4 text-gray-700">
-                  <p className="text-lg sm:text-xl leading-relaxed">
-                    Perfect for sharing with family and friends! Our group packs
-                    feature generous portions and flavorful explosions.
-                  </p>
-
-                  <div className="bg-red-50 p-4 rounded-xl border-l-4 border-red-500">
-                    <h3 className="font-semibold text-red-800 mb-2">
-                      Available Flavors:
-                    </h3>
-                    <div className="text-red-700 grid grid-cols-2 lg:grid-cols-3">
-                      {flavors.map((flavor) => (
-                        <p key={flavor}>{flavor}</p>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4 mt-6">
-                    <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-4 rounded-xl flex-1 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                      <span className="text-sm font-medium opacity-90">
-                        6 pieces
-                      </span>
-                      <div className="text-2xl font-bold">₱279</div>
-                    </div>
-                    <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-4 rounded-xl flex-1 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                      <span className="text-sm font-medium opacity-90">
-                        12 pieces
-                      </span>
-                      <div className="text-2xl font-bold">₱549</div>
-                    </div>
-                  </div>
-
-                  <OrderModal />
-                </div>
-              </MotionWrapper>
-            </div>
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+            {categories.map(
+              (category) =>
+                category.code === activeCategory &&
+                category.products.map((item) => (
+                  <MenuCard key={item.name} item={item} />
+                ))
+            )}
           </div>
         </section>
       </main>

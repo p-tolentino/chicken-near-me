@@ -17,14 +17,18 @@ import { FaChevronRight as ChevronRight } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-export function OrderModal() {
+export function OrderModal({
+  size = "lg",
+}: {
+  size?: "lg" | "default" | "sm" | "icon" | null;
+}) {
   const router = useRouter();
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          size="lg"
+          size={size}
           className="bg-[#f2ac07] hover:bg-[#dd9e0a] hover:cursor-pointer text-base"
         >
           Order Now
