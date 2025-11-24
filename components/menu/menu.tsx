@@ -17,16 +17,17 @@ const categories = [
       },
       {
         type: "chicken",
-        name: "Jumbo Meal",
-        price: 209,
-        src: "/chicken/jumbo.png",
-      },
-      {
-        type: "chicken",
         name: "Solo Combo Meal",
         price: 199,
         src: "/chicken/solo-combo.png",
       },
+      {
+        type: "chicken",
+        name: "Jumbo Meal",
+        price: 209,
+        src: "/chicken/jumbo.png",
+      },
+
       {
         type: "chicken",
         name: "Jumbo Combo Meal",
