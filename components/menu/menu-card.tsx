@@ -17,6 +17,7 @@ import { ReactNode } from "react";
 
 import { OrderModal } from "../order-modal";
 import Image from "next/image";
+import { Separator } from "../ui/separator";
 
 export interface MenuItem {
   type: string;
@@ -94,36 +95,39 @@ const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
           </div>
         )}
 
-        <MotionWrapper delay={0.1}>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base sm:text-lg ">{item.name}</CardTitle>
-            <CardDescription className="min-h-[3rem] sm:min-h-[3.5rem] text-xs sm:text-sm">
-              {getFlavorText()}
-            </CardDescription>
-          </CardHeader>
-        </MotionWrapper>
+        <CardHeader className="pb-3">
+          <CardTitle className="text-base sm:text-lg md:text-2xl">
+            {item.name}
+          </CardTitle>
+          <CardDescription className="min-h-[3rem] sm:min-h-[3.5rem] text-xs sm:text-sm">
+            {getFlavorText()}
+          </CardDescription>
+        </CardHeader>
+        <div className="px-4 -my-4">
+          <Separator />
+        </div>
 
         <CardContent className="flex-grow flex items-center justify-center pb-3">
-          <MotionWrapper delay={0.2}>
-            <div className="relative w-[300px] h-[300px]">
-              {imageLoading && (
-                <Skeleton className="w-[300px] h-[300px] rounded-md" />
-              )}
-              <Image
-                src={item.src || placeholderLink}
-                priority
-                width={300}
-                height={300}
-                alt={item.name}
-                onLoad={() => setImageLoading(false)}
-                className={`object-cover rounded-md hover:scale-105 transition-transform duration-500 ${
-                  item.comingSoon && "opacity-20"
-                }`}
-              />
-            </div>
-          </MotionWrapper>
+          <div className="relative w-[300px] h-[300px]">
+            {imageLoading && (
+              <Skeleton className="w-[300px] h-[300px] rounded-md" />
+            )}
+            <Image
+              src={item.src || placeholderLink}
+              priority
+              width={300}
+              height={300}
+              alt={item.name}
+              onLoad={() => setImageLoading(false)}
+              className={`object-cover rounded-md hover:scale-105 transition-transform duration-500 ${
+                item.comingSoon && "opacity-20"
+              }`}
+            />
+          </div>
         </CardContent>
-
+        <div className="px-4 -my-4">
+          <Separator />
+        </div>
         <CardFooter className="flex justify-between items-center pt-3 min-h-[3rem] sm:min-h-[3.5rem]">
           <p className="text-base sm:text-lg font-semibold">
             {item.price !== "-" ? `₱${item.price}.00` : ""}
