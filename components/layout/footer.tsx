@@ -7,7 +7,7 @@ const data = {
   instaLink: "https://www.instagram.com/chickennearmeph",
   linkedInLink: "https://www.linkedin.com/company/chicken-near-me",
   services: {
-    menu: "/menu",
+    menu: "/menu?category=rice",
     // webdesign: "/web-design",
     // marketing: "/marketing",
     // googleads: "/google-ads",
