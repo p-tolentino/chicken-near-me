@@ -25,6 +25,7 @@ export interface MenuItem {
   src: string;
   price: number | string;
   comingSoon?: boolean;
+  newArrival?: boolean;
 }
 
 export interface MenuCardProps {
@@ -41,9 +42,12 @@ const flavors = {
     "Garlic Parmesan",
     "Salted Egg",
     "Soy Garlic",
+    "Snow Cheese",
+    "Calamansi Habañero",
   ],
   sodaCan: ["Coke", "Coke Zero", "Sprite", "Royal"],
   flavored: ["Lychee", "Four Seasons", "Strawberry", "Blue Lemonade"],
+  coffee: ["25%", "50%", "75%", "100%"],
   sauce: [
     "Original",
     "Honey Mustard",
@@ -51,10 +55,11 @@ const flavors = {
     "Hickory Barbecue",
     "Classic Buffalo",
     "Soy Garlic",
+    "Calamansi Habañero",
   ],
 };
 
-const flavoredTypes = ["chicken", "sodaCan", "flavored", "sauce"];
+const flavoredTypes = ["chicken", "sodaCan", "flavored", "coffee", "sauce"];
 
 interface MotionWrapperProps {
   children: ReactNode;
@@ -85,11 +90,15 @@ const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
         ? flavors.sodaCan
         : item.type === "flavored"
         ? flavors.flavored
+        : item.type === "coffee"
+        ? flavors.coffee
         : item.type === "sauce"
         ? flavors.sauce
         : [];
 
-    return `Available Flavors: ${flavorList.join(", ")}`;
+    return `${
+      item.type !== "coffee" ? `Available Flavors:` : `Sugar Levels:`
+    } ${flavorList.join(", ")}`;
   };
 
   return (
@@ -101,6 +110,16 @@ const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
             <div className="absolute size-2 bottom-0 right-0 bg-red-900"></div>
             <span className="bg-primary py-1.5 shadow-sm block absolute font-mapleb w-[145%] text-center text-white bottom-0 right-0 rotate-45 origin-bottom-right">
               Coming Soon!
+            </span>
+          </div>
+        )}
+
+        {item.newArrival && (
+          <div className="absolute size-36 -top-2 -right-2 rounded-sm overflow-hidden">
+            <div className="absolute size-2 top-0 left-0 bg-red-900"></div>
+            <div className="absolute size-2 bottom-0 right-0 bg-red-900"></div>
+            <span className="bg-primary text-2xl py-1.5 shadow-sm block absolute font-mapleb w-[145%] text-center text-white bottom-0 right-0 rotate-45 origin-bottom-right">
+              NEW!
             </span>
           </div>
         )}

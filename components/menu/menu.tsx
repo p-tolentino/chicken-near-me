@@ -96,8 +96,8 @@ const categories = [
       {
         type: "coffee",
         name: "Iced Coffee",
-        price: "-",
-        comingSoon: true,
+        price: 89,
+        newArrival: true,
         src: "/drinks/coffee.png",
       },
     ],

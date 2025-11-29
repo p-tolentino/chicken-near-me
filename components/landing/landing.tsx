@@ -99,7 +99,18 @@ export default function Landing({
                     alt="6-piece Original"
                     className="rounded-3xl object-cover mx-auto w-full"
                   />
-                  <div className="absolute top-4 -right-4 sm:top-4 sm:-right-8 lg:top-6 lg:-right-12">
+                  <div
+                    className="absolute top-4 -right-4 sm:top-4 sm:-right-8 lg:top-6 lg:-right-12"
+                    onClick={() => router.push(`/menu?category=drinks`)}
+                  >
+                    <div className="group relative text-xs sm:text-sm lg:text-base shadow-lg px-2 sm:px-3 py-1 sm:py-2 group-hover:cursor-pointer rounded-full font-medium text-white bg-white transition-all">
+                      <div className="absolute inset-[1px] bg-primary rounded-full group-hover:scale-105 group-hover:cursor-pointer transition-all"></div>
+                      <span className="relative z-10 group-hover:text-lg group-hover:cursor-pointer transition-all">
+                        {`Check out what's new! →`}
+                      </span>
+                    </div>
+                  </div>
+                  {/* <div className="absolute top-4 -right-4 sm:top-4 sm:-right-8 lg:top-6 lg:-right-12">
                     <div className="group relative text-xs sm:text-sm lg:text-base shadow-lg px-2 sm:px-3 py-1 sm:py-2 rounded-full text-white font-medium bg-white">
                       <div className="absolute inset-[1px] bg-primary rounded-full group-hover:opacity-10 transition-all"></div>
                       <span className="relative z-10 group-hover:text-gray-400 transition-all">
@@ -128,7 +139,7 @@ export default function Landing({
                         !
                       </span>
                     </div>
-                  </div>
+                  </div> */}
                 </MotionWrapper>
               </div>
             </div>
