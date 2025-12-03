@@ -63,6 +63,10 @@ export default function Landing({
 
   const autoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: false }));
 
+  const avgRating =
+    testimonials.map((t) => t.rating).reduce((a, b) => a + b) /
+    testimonials.length;
+
   return (
     <div className="flex flex-col min-h-fit max-h-screen">
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 flex-grow">
@@ -173,8 +177,11 @@ export default function Landing({
           <section className="mb-16 sm:mb-20 lg:mb-24">
             <Card className="bg-primary text-white">
               <CardContent className="p-4 sm:p-6 lg:p-8">
-                <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-center lg:text-left">
+                <h3 className="flex gap-2 text-2xl sm:text-3xl font-bold mb-4 text-center lg:text-left">
                   What Our Customers Say
+                  <span className="flex italic space-x-2 font-medium text-white/70">
+                    ({testimonials.length})
+                  </span>
                 </h3>
 
                 <div className="p-4 sm:p-6 lg:p-10">
