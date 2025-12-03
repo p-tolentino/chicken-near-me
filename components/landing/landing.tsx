@@ -63,10 +63,6 @@ export default function Landing({
 
   const autoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: false }));
 
-  const avgRating =
-    testimonials.map((t) => t.rating).reduce((a, b) => a + b) /
-    testimonials.length;
-
   return (
     <div className="flex flex-col min-h-fit max-h-screen">
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 flex-grow">
